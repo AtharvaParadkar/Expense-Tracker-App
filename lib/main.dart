@@ -7,6 +7,7 @@ void main() {
       home: const Expenses(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
       ),
     ),

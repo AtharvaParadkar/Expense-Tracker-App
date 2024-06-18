@@ -29,8 +29,9 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.add))],
         title: const Text('Expense Tracker'),
-        backgroundColor: const Color.fromARGB(255, 0, 0, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 0, 0),
       ),
       body: Column(
         children: [

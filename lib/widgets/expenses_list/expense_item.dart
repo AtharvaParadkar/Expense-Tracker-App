@@ -9,13 +9,14 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // color: const Color.fromARGB(255, 0, 255, 0),
+      // color: const Color.fromARGB(255, 0, 0, 255),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 16,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(expense.title),
             const SizedBox(height: 4),
@@ -31,11 +32,6 @@ class ExpenseItem extends StatelessWidget {
                     Text(expense.formattedDate),
                   ],
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(expense.category.toString()),
               ],
             ),
           ],
