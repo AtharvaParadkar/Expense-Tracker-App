@@ -1,8 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
+
+final formatter = DateFormat.yMd();
 
 const uuid = Uuid();
 
 enum Category { food, travel, leisure, work }
+
+const categoryIcons = {
+  Category.food: Icons.dinner_dining_outlined,
+  Category.travel: Icons.flight_takeoff_sharp,
+  Category.leisure: Icons.movie_sharp,
+  Category.work: Icons.work_outline_rounded,
+};
 
 class Expense {
   Expense({
@@ -10,11 +21,17 @@ class Expense {
     required this.amount,
     required this.date,
     required this.category,
-}) : id = uuid.v4();
+  }) : id = uuid.v4();
   //^ ': id = uuid.v4();' this initializer list is a dart feature that can be used to initialize class properties (like 'id') with values thar are NOT recevied as constructor funtion arguments.
 
   final String id, title;
   final double amount;
   final DateTime date;
   final Category category;
+
+  //& 'Getters' are basically 'computed properties' => properties that are dynamically derived, based on other class properties.
+  String get formattedDate{
+    return formatter.format(date);
+  }
+
 }
