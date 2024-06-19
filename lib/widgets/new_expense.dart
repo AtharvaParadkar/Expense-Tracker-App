@@ -8,10 +8,23 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  var _enteredTitle = '';
-  void _saveTitleInput(String inputValue) {
-    _enteredTitle = inputValue;
+  //* There are 2 ways to store the value
+
+  //& 1 way
+  //& var _enteredTitle = '';
+  //& void _saveTitleInput(String inputValue) {
+  //&   _enteredTitle = inputValue;
+  //& }
+
+  //~ 2 way
+  final _titleController = TextEditingController();
+  //^ When you create the TextEditingController tell flutter to delete thet controller when widget is not needed anymore
+  @override
+  void dispose() {        //? Only stateful widget can implement dispose
+    _titleController.dispose();
+    super.dispose();
   }
+  // Dispose like 'initState' and 'build' is part of statful widgets lifecycle. Its called automatically by flutter when the widget & its state are about to be destroyed(removed from UI).
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +33,10 @@ class _NewExpenseState extends State<NewExpense> {
         child: Column(
           children: [
             TextField(
-              onChanged: _saveTitleInput, //* To store the value
+              //& 1 Way
+              //& onChanged: _saveTitleInput, 
+              //~ 2 way
+              controller: _titleController,
               maxLength: 50,
               keyboardType: TextInputType.name,
               decoration: const InputDecoration(
@@ -31,7 +47,7 @@ class _NewExpenseState extends State<NewExpense> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    print(_enteredTitle);
+                    print(_titleController.text);
                   },
                   child: const Text('Save Expense'),
                 ),
