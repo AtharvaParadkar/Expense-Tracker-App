@@ -1,3 +1,6 @@
+// ignore_for_file: avoid_print
+
+import 'package:expense_tracker_app/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
@@ -29,6 +32,24 @@ class _NewExpenseState extends State<NewExpense> {
   }
   // Dispose like 'initState' and 'build' is part of statful widgets lifecycle. Its called automatically by flutter when the widget & its state are about to be destroyed(removed from UI).
 
+  DateTime? _selectedDate;
+
+  void _presentDatePicker() async {
+    final now = DateTime.now(),
+        firstDate = DateTime(now.year - 2, now.month, now.day);
+
+    final pickedDate = await showDatePicker(
+      context: context,
+      firstDate: firstDate,
+      lastDate: now,
+      // initialDate: now,
+    );
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,14 +67,38 @@ class _NewExpenseState extends State<NewExpense> {
                 label: Text('Title'),
               ),
             ),
-            TextField(
-              controller: _amountController,
-              maxLength: 8,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                prefixText: '\u{20B9} ',
-                label: Text('Amount'),
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _amountController,
+                    maxLength: 8,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      prefixText: '\u{20B9} ',
+                      label: Text('Amount'),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        _selectedDate == null
+                            ? 'No Data Selected'
+                            : formatter.format(_selectedDate!),
+                      ),
+                      IconButton(
+                        onPressed: _presentDatePicker,
+                        icon: const Icon(Icons.calendar_month_outlined),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Row(
               children: [
@@ -65,7 +110,9 @@ class _NewExpenseState extends State<NewExpense> {
                   child: const Text('Save Expense'),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: const Text('Close'),
                 ),
               ],
