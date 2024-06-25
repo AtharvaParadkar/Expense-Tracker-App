@@ -32,6 +32,8 @@ class _NewExpenseState extends State<NewExpense> {
   }
   // Dispose like 'initState' and 'build' is part of statful widgets lifecycle. Its called automatically by flutter when the widget & its state are about to be destroyed(removed from UI).
 
+  Category _selectedCategory = Category.travel;
+
   DateTime? _selectedDate;
 
   void _presentDatePicker() async {
@@ -100,8 +102,32 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
               ],
             ),
+            const SizedBox(height: 13),
             Row(
               children: [
+                DropdownButton(
+                  //^ DropDown Button does't suppor controller
+                  value: _selectedCategory,
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(
+                            category.name.toUpperCase(),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if(value==null){
+                      return;
+                    }
+                    setState(() {
+                      _selectedCategory=value;
+                    });
+                  },
+                ),
+                const Spacer(),
                 ElevatedButton(
                   onPressed: () {
                     print(_titleController.text);
