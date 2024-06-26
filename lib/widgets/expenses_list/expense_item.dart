@@ -22,7 +22,7 @@ class ExpenseItem extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               children: [
-                Text('\u{20B9}${expense.amount.toStringAsFixed(2)}'),
+                Text('\u{20B9} ${expense.amount.toStringAsFixed(2)}'),
                 //^ Spacer will take all the remaining space left by the text and row widget. Hence the text will go in the left and row in the right
                 const Spacer(),
                 Row(

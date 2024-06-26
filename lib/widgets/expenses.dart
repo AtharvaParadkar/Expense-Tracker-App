@@ -25,12 +25,19 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
   ];
+  
+//^ Using our coustom class Expense as a type
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpense.add(expense);
+    });
+  }
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
       context: context,
       //~ ctx is the context object for the modal element that's created by flutter
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
   }
 
