@@ -18,7 +18,11 @@ class ExpensesList extends StatelessWidget {
       itemBuilder: (ctx, i) => Dismissible(
         //^ ValueKey() creates a key object, which can be used as a value for this key parameter
         key: ValueKey(expenses[i]),
-        onDismissed: (direction) => onRemoveExpense(expenses[i]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(0.95),
+          margin: EdgeInsets.symmetric(
+              horizontal: Theme.of(context).cardTheme.margin!.horizontal),
+        ),
         child: ExpenseItem(expenses[i]),
       ),
     );

@@ -25,8 +25,9 @@ void main() {
               backgroundColor: kColorScheme.primaryContainer),
         ),
         textTheme: ThemeData().textTheme.copyWith(
-          titleLarge: const TextStyle(
+          titleLarge: TextStyle(
             fontSize: 20,
+            color: kColorScheme.onSecondaryContainer,
           ),
         ),
       ),
