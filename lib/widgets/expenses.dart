@@ -91,7 +91,6 @@ class _ExpensesState extends State<Expenses> {
           )
         ],
         title: const Text('Expense Tracker'),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 0),
       ),
       body: Column(
         children: [
