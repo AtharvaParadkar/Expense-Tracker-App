@@ -19,9 +19,6 @@ class ExpensesList extends StatelessWidget {
         //^ ValueKey() creates a key object, which can be used as a value for this key parameter
         key: ValueKey(expenses[i]),
         onDismissed: (direction) => onRemoveExpense(expenses[i]),
-        background: Container(color: const Color.fromARGB(255, 255, 0, 0)),
-        secondaryBackground:
-            Container(color: const Color.fromARGB(255, 0, 255, 0)),
         child: ExpenseItem(expenses[i]),
       ),
     );
