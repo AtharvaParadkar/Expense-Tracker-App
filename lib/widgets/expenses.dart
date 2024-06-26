@@ -25,11 +25,17 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
   ];
-  
+
 //^ Using our coustom class Expense as a type
   void _addExpense(Expense expense) {
     setState(() {
       _registeredExpense.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpense.remove(expense);
     });
   }
 
@@ -59,7 +65,12 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text('The Chart'),
           const Text('Expenses List....'),
-          Expanded(child: ExpensesList(expenses: _registeredExpense)),
+          Expanded(
+            child: ExpensesList(
+              expenses: _registeredExpense,
+              onRemoveExpense: _removeExpense,
+            ),
+          ),
         ],
       ),
     );
