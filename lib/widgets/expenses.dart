@@ -35,6 +35,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       //~ ctx is the context object for the modal element that's created by flutter
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
