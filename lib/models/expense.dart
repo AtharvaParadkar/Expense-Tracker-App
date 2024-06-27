@@ -30,8 +30,33 @@ class Expense {
   final Category category;
 
   //& 'Getters' are basically 'computed properties' => properties that are dynamically derived, based on other class properties.
-  String get formattedDate{
+  String get formattedDate {
     return formatter.format(date);
   }
+}
 
+class ExpenseBucket {
+  ExpenseBucket({required this.category, required this.expenses});
+
+  //& Utility Constructor Function
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((expense) => expense.category == category)
+            .toList();
+  //? The colon (:) introduces the initializer list.
+  //? the 'where' is is simply a method that allows you to filter a list.
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses {
+    double sum = 0;
+
+    //^ for in Loop
+    for (final expense in expenses) {
+      sum += expense.amount;
+    }
+
+    return sum;
+  }
 }
