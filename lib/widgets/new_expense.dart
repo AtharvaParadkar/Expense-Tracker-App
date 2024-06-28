@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+
 import 'package:expense_tracker_app/models/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({required this.onAddExpense, super.key});
@@ -54,15 +57,24 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void _submitExpenseData() {
-    //* tryParse() takes string as a input and returns double
-    final enteredAmount = double.tryParse(_amountController.text);
-    // tryParse('Hello') => null, tryParse('11.2') => 11.2
-    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-    //* Trim() removes any white spaces
-    if (_titleController.text.trim().isEmpty ||
-        amountIsInvalid ||
-        _selectedDate == null) {
+  void _showDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (mia) => CupertinoAlertDialog(
+          title: const Text('Invalid Input!'),
+          content: const Text('Please make sure you have entered valid data'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(mia);
+              },
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+    } else {
       showDialog(
         context: context,
         builder: (mia) => AlertDialog(
@@ -78,6 +90,19 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
+    }
+  }
+
+  void _submitExpenseData() {
+    //* tryParse() takes string as a input and returns double
+    final enteredAmount = double.tryParse(_amountController.text);
+    // tryParse('Hello') => null, tryParse('11.2') => 11.2
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    //* Trim() removes any white spaces
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      _showDialog();
       return;
     }
 

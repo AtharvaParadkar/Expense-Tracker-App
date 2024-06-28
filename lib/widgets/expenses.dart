@@ -91,6 +91,7 @@ class _ExpensesState extends State<Expenses> {
       //? The property resizeToAvoidBottomInset prevents the chart from resizing, when kept false, when the keyboard is displayed.
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        centerTitle: false,
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
