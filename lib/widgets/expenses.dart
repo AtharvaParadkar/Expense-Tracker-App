@@ -63,6 +63,8 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      //? A safe area is a simple built in flutter feature that makes sure that we stay away from device features like camera that are affecting our UI
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       //~ ctx is the context object for the modal element that's created by flutter
