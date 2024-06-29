@@ -126,7 +126,7 @@ class _NewExpenseState extends State<NewExpense> {
         height: double.infinity,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 0.1, 20, keyboardSpacing + 20),
+            padding: EdgeInsets.fromLTRB(13, 0.1, 13, keyboardSpacing + 20),
             child: Column(
               children: [
                 if (width >= 600)
@@ -228,7 +228,7 @@ class _NewExpenseState extends State<NewExpense> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 14),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
